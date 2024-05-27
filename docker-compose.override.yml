@@ -1,0 +1,36 @@
+version: '3.4'
+
+services:
+  accountservice.presentation:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - JWT_KEY=phreshboyswagphreshboyswagaboba5phreshboyswagphreshboyswagaboba5phreshboyswagphreshboyswagaboba5phreshboyswagphreshboyswagaboba5
+      - JWT_EXPIRES=5
+      - JWT_REFRESH_EXPIRES=20
+      - JWT_ISSUER=https://al.accountservice.com
+      - JWT_AUDIENCE=https://al.shop.com 
+    ports:
+      - "8080"
+      - "8081"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+
+  productservice.presentation:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - JWT_KEY=phreshboyswagphreshboyswagaboba5phreshboyswagphreshboyswagaboba5phreshboyswagphreshboyswagaboba5phreshboyswagphreshboyswagaboba5
+      - JWT_EXPIRES=5
+      - JWT_REFRESH_EXPIRES=20
+      - JWT_ISSUER=https://al.accountservice.com
+      - JWT_AUDIENCE=https://al.shop.com 
+    ports:
+      - "8080"
+      - "8081"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro

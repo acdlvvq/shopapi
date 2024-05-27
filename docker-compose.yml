@@ -1,0 +1,52 @@
+version: '3.4'
+
+networks:
+  db-dev:
+    driver: bridge
+
+services:
+  accountservice.presentation:
+    image: ${DOCKER_REGISTRY-}accountservicepresentation
+    build:
+      context: .
+      dockerfile: shp/AccountService/AccountService.Presentation/Dockerfile
+    networks:
+      - db-dev
+    depends_on:
+      - mssql-db
+
+  productservice.presentation:
+    image: ${DOCKER_REGISTRY-}productservicepresentation
+    build:
+      context: .
+      dockerfile: shp/ProductService/ProductService.Presentation/Dockerfile
+    networks:
+      - db-dev
+    depends_on:
+      - mssql-db
+
+  mssql-db:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Pass@word
+    ports:
+      - '5433:1433'
+    networks:
+      - db-dev
+    volumes:
+      - mssql-data:/var/opt/mssql/data
+
+  admin:
+    image: adminer
+    depends_on:
+    - mssql-db
+    ports:
+    - '8080:8080'
+    networks:
+      - db-dev
+
+volumes:
+  mssql-data:
+      
+

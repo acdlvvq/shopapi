@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "AccountService.UnitTests": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
